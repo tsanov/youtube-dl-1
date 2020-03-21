@@ -1,7 +1,7 @@
 FROM python:latest
 # its home directory will be /${home_inside_the_container}/${user_inside_the_container}
-ARG USER_INSIDE_THE_CONTAINER=nikolaytsanov
-ARG HOME_INSIDE_THE_CONTAINER=Users
+ARG USER_INSIDE_THE_CONTAINER=youtube-dl
+ARG HOME_INSIDE_THE_CONTAINER=home
 
 # To prevent prompts during build
 ENV DEBIAN_FRONTEND=noninteractive
