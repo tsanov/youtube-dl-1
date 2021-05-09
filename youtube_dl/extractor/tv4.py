@@ -17,7 +17,7 @@ class TV4IE(InfoExtractor):
             tv4\.se/(?:[^/]+)/klipp/(?:.*)-|
             tv4play\.se/
             (?:
-                (?:program|barn)/(?:[^/]+/|(?:[^\?]+)\?video_id=)|
+                (?:program|barn)/(?:(?:[^/]+/){1,2}|(?:[^\?]+)\?video_id=)|
                 iframe/video/|
                 film/|
                 sport/|
@@ -65,6 +65,10 @@ class TV4IE(InfoExtractor):
         {
             'url': 'http://www.tv4play.se/program/farang/3922081',
             'only_matching': True,
+        },
+        {
+            'url': 'https://www.tv4play.se/program/nyheterna/avsnitt/13315940',
+            'only_matching': True,
         }
     ]
 
@@ -99,7 +103,7 @@ class TV4IE(InfoExtractor):
             manifest_url.replace('.m3u8', '.f4m'),
             video_id, f4m_id='hds', fatal=False))
         formats.extend(self._extract_ism_formats(
-            re.sub(r'\.ism/.+?\.m3u8', r'.ism/Manifest', manifest_url),
+            re.sub(r'\.ism/.*?\.m3u8', r'.ism/Manifest', manifest_url),
             video_id, ism_id='mss', fatal=False))
 
         if not formats and info.get('is_geo_restricted'):
